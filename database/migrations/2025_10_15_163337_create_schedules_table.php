@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->enum('status', ['Pending','Started','Finished'])->default('Pending');
+            $table->timestamp('datetime')->nullable();
+            $table->string('language')->nullable();
+            $table->foreignId('location_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
+
     }
 
     /**
