@@ -67,7 +67,7 @@ class ScheduleService
         $schedule->status = $map[$schedule->status] ?? 'Pending';
         $schedule->save();
 
-        return $schedule;
+        return response()->json($schedule);
     }
 
     /**
