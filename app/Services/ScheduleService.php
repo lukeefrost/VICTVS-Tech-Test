@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Http\Resources\ScheduleResource;
 use App\Models\Candidate;
 use App\Models\Location;
 use App\Models\Schedule;
@@ -53,7 +54,6 @@ class ScheduleService
         return Schedule::with(['candidates', 'location'])->findOrFail($id);
     }
 
-
     /**
      * @param $id
      * @return mixed
@@ -67,7 +67,7 @@ class ScheduleService
         $schedule->status = $map[$schedule->status] ?? 'Pending';
         $schedule->save();
 
-        return response()->json($schedule);
+        return new ScheduleResource($schedule);
     }
 
     /**
