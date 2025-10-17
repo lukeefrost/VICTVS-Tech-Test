@@ -23,7 +23,7 @@ class ScheduleController extends Controller
 
         $schedules = ScheduleResource::collection($paginator)->response()->getData(true);
 
-        return Inertia::render('Schedules/Index', [
+        return Inertia::render('schedules/Index', [
             'schedules' => $schedules['data'],
             'meta' => $schedules['meta'] ?? $paginator->toArray()['meta'] ?? null,
             'filters' => $request->only(['status','candidate','country','date','sort','page']),
