@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Filters\ScheduleFilter;
 use App\Http\Resources\ScheduleResource;
 use App\Models\Candidate;
 use App\Models\Location;
@@ -18,29 +19,8 @@ class ScheduleService
     {
         $query = Schedule::with(['candidates', 'location']);
 
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-        if ($request->filled('candidate')) {
-            $query->whereHas('candidates', function ($q) use ($request) {
-                $q->where('name', 'like', "%{$request->candidate}%");
-            });
-        }
-        if ($request->filled('country')) {
-            $query->whereHas('location', function ($q) use ($request) {
-                $q->where('country', 'like', "%{$request->country}%");
-            });
-        }
-        if ($request->filled('date')) {
-            $query->whereDate('datetime', $request->date);
-        }
-
-        if ($request->filled('sort')) {
-            [$col, $dir] = array_merge(explode(':', $request->sort), ['asc']);
-            $query->orderBy($col, $dir);
-        } else {
-            $query->orderBy('datetime', 'asc');
-        }
+        $filter = new ScheduleFilter($request);
+        $query = $filter->apply($query);
 
         return $query->paginate(20);
     }
