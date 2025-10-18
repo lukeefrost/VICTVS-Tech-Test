@@ -56,7 +56,7 @@ class ScheduleService
      */
     public function createSchedule(array $data)
     {
-        $loc = Location::firstOrCreate(
+        $location = Location::firstOrCreate(
             ['country' => $data['location']['country']],
             [
                 'latitude' => $data['location']['latitude'] ?? null,
@@ -69,7 +69,7 @@ class ScheduleService
             'status' => $data['status'] ?? 'Pending',
             'datetime' => $data['datetime'] ?? null,
             'language' => $data['language'] ?? null,
-            'location_id' => $loc->id,
+            'location_id' => $location->id,
         ]);
 
         foreach ($data['candidates'] ?? [] as $name) {
