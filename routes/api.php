@@ -10,4 +10,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/schedules', [ScheduleController::class, 'index']);
 Route::get('/schedules/{id}', [ScheduleController::class, 'show']);
-Route::patch('/schedules/{id}/advance', [ScheduleController::class, 'saveStatus']);
+Route::patch('/schedules/{id}/save', [ScheduleController::class, 'saveStatus']);
