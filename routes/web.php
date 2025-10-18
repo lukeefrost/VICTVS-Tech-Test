@@ -12,7 +12,7 @@ use Inertia\Inertia;
 //    return Inertia::render('Dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
+Route::get('/', [ScheduleController::class, 'index'])->name('schedules.index');
 
 //Route::get('/{any}', function () {
 //    return view('app');
