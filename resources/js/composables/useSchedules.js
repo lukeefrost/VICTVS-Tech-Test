@@ -32,7 +32,8 @@ export function useSchedules() {
 
     async function save(id) {
         try {
-            const updated = await api.saveSchedule(id)
+            const response = await api.saveSchedule(id)
+            const updated = response.data || response
             const idx = items.value.findIndex(i => i.id === id)
             if (idx !== -1) items.value.splice(idx, 1, updated)
             return updated

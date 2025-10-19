@@ -17,13 +17,13 @@
 
         <div class="flex flex-col items-end gap-2">
             <span :class="statusClass" class="rounded-full px-3 py-1 text-sm">{{
-                    schedule.status
-                }}</span>
+                schedule.status
+            }}</span>
             <button
-                @click="$emit('save', schedule.id)"
+                @click="$emit('advance', schedule.id)"
                 class="rounded border px-3 py-1 text-sm hover:bg-gray-50"
             >
-                Advance status
+                Change Status
             </button>
         </div>
     </div>
@@ -57,7 +57,7 @@ interface Props {
 const props = defineProps<Props>();
 
 defineEmits<{
-    save: [id: number];
+    advance: [id: number];
 }>();
 
 const candidateNames = computed(() => {
