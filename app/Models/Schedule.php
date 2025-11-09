@@ -10,6 +10,11 @@ class Schedule extends Model
 
     protected $casts = ['datetime' => 'datetime'];
 
+//    private const STATUS_PENDING = 'Pending';
+//    private const STATUS_STARTED = 'Started';
+//    private const STATUS_FINISHED = 'Finished';
+    public const STATUS_CANCELLED = 'Cancelled';
+
     public function location()
     {
         return $this->belongsTo(Location::class);

@@ -7,6 +7,7 @@ use App\Models\Candidate;
 use App\Models\Location;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use const Grpc\STATUS_CANCELLED;
 
 class ScheduleService
 {
@@ -45,6 +46,16 @@ class ScheduleService
         $map = ['Pending' => 'Started', 'Started' => 'Finished', 'Finished' => 'Finished'];
 
         $schedule->status = $map[$schedule->status] ?? 'Pending';
+        $schedule->save();
+
+        return new ScheduleResource($schedule);
+    }
+
+    public function cancelSchedule($id)
+    {
+        $schedule = Schedule::findOrFail($id);
+
+        $schedule->status = Schedule::STATUS_CANCELLED;
         $schedule->save();
 
         return new ScheduleResource($schedule);

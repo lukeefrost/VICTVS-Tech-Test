@@ -29,4 +29,9 @@ class ScheduleController extends Controller
     {
         return response()->json($this->service->saveScheduleStatus($id));
     }
+
+    public function cancelSchedule($id): \Illuminate\Http\JsonResponse
+    {
+        return response()->json($this->service->cancelSchedule($id));
+    }
 }

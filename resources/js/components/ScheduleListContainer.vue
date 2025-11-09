@@ -14,6 +14,7 @@
                 :key="s.id"
                 :schedule="s"
                 @advance="onAdvance"
+                @cancel="onCancel"
             />
         </div>
 
@@ -27,7 +28,7 @@ import { useSchedules } from '@/composables/useSchedules';
 import FilterBar from '@/components/FilterBar.vue';
 import ScheduleCard from '@/components/ScheduleCard.vue';
 
-const { items, loading, error, filters, load, save} = useSchedules();
+const { items, loading, error, filters, load, save, cancel } = useSchedules();
 
 onMounted(() => load());
 
@@ -49,6 +50,10 @@ function clearFilters() {
 
 async function onAdvance(id: number) {
     await save(id);
+}
+
+async function onCancel(id: number) {
+    await cancel(id);
 }
 </script>
 

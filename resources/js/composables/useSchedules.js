@@ -43,5 +43,18 @@ export function useSchedules() {
         }
     }
 
-    return { items, loading, error, filters, load, save };
+    async function cancel(id) {
+        try {
+            const response = await api.cancelSchedule(id);
+            const updated = response.data || response;
+            const idx = items.value.findIndex((i) => i.id === id);
+            if (idx !== -1) items.value.splice(idx, 1, updated);
+            return updated;
+        } catch (e) {
+            error.value = e?.message || 'Failed to update';
+            throw e;
+        }
+    }
+
+    return { items, loading, error, filters, load, save, cancel };
 }

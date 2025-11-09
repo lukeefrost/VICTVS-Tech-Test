@@ -11,3 +11,8 @@ export async function saveSchedule(id) {
     const res = await axios.patch(`${API_LINK}/schedules/${id}/save`)
     return res.data
 }
+
+export async function cancelSchedule(id) {
+    const res = await axios.patch(`${API_LINK}/schedules/${id}/cancel`);
+    return res.data;
+}
